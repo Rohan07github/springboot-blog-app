@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="/fragments/head :: head"></head>
+
+  <body class="sub_page bg-light">
+    <div class="hero_area">
+      <div class="bg-box">
+        <img th:src="@{/images/nav-bg.jpg}" alt="" />
+      </div>
+      <header th:replace="/fragments/header :: header"></header>
+    </div>
+
+    <!-- Register section -->
+    <section class="book_section layout_padding">
+      <div class="container">
+        <div class="heading_container text-center mb-4">
+          <h2 class="fw-bold text-primary">Create Your Account</h2>
+          <p class="text-muted">
+            Join Techroniverse and explore the future of tech!
+          </p>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-md-8 shadow bg-white p-5 rounded-4">
+            <div class="form_container">
+              <form
+                action="#"
+                th:action="@{/register}"
+                th:object="${account}"
+                method="POST"
+                class="row g-3"
+              >
+                <div class="col-md-6">
+                  <label for="email" class="form-label fw-semibold"
+                    >Email</label
+                  >
+                  <input
+                    id="email"
+                    type="email"
+                    th:field="*{email}"
+                    class="form-control"
+                    placeholder="you@example.com"
+                    required
+                  />
+                  <div
+                    th:if="${#fields.hasErrors('email')}"
+                    class="text-danger small"
+                    th:errors="*{email}"
+                  ></div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="password" class="form-label fw-semibold"
+                    >Password</label
+                  >
+                  <input
+                    id="password"
+                    type="password"
+                    th:field="*{password}"
+                    class="form-control"
+                    placeholder="Create password"
+                    required
+                  />
+                  <div
+                    th:if="${#fields.hasErrors('password')}"
+                    class="text-danger small"
+                    th:errors="*{password}"
+                  ></div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="firstname" class="form-label fw-semibold"
+                    >First Name</label
+                  >
+                  <input
+                    id="firstname"
+                    type="text"
+                    th:field="*{firstname}"
+                    class="form-control"
+                    placeholder="First name"
+                    required
+                  />
+                  <div
+                    th:if="${#fields.hasErrors('firstname')}"
+                    class="text-danger small"
+                    th:errors="*{firstname}"
+                  ></div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="lastname" class="form-label fw-semibold"
+                    >Last Name</label
+                  >
+                  <input
+                    id="lastname"
+                    type="text"
+                    th:field="*{lastname}"
+                    class="form-control"
+                    placeholder="Last name"
+                    required
+                  />
+                  <div
+                    th:if="${#fields.hasErrors('lastname')}"
+                    class="text-danger small"
+                    th:errors="*{lastname}"
+                  ></div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="age" class="form-label fw-semibold">Age</label>
+                  <input
+                    id="age"
+                    type="number"
+                    th:field="*{age}"
+                    min="18"
+                    max="99"
+                    class="form-control"
+                    placeholder="Your age"
+                    required
+                  />
+                  <div
+                    th:if="${#fields.hasErrors('age')}"
+                    class="text-danger small"
+                    th:errors="*{age}"
+                  ></div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="date_of_birth" class="form-label fw-semibold"
+                    >Date of Birth</label
+                  >
+                  <input
+                    id="date_of_birth"
+                    type="date"
+                    th:field="*{date_of_birth}"
+                    class="form-control"
+                    required
+                  />
+                  <div
+                    th:if="${#fields.hasErrors('date_of_birth')}"
+                    class="text-danger small"
+                    th:errors="*{date_of_birth}"
+                  ></div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="gender" class="form-label fw-semibold d-block"
+                    >Gender</label
+                  >
+                  <select
+                    id="gender"
+                    name="gender"
+                    th:field="*{gender}"
+                    class="form-select"
+                    required
+                  >
+                    <option value="" disabled selected>
+                      Select your gender
+                    </option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Others">Others</option>
+                  </select>
+                  <div
+                    th:if="${#fields.hasErrors('gender')}"
+                    class="text-danger small mt-1"
+                    th:errors="*{gender}"
+                  ></div>
+                </div>
+
+                <div class="col-12 text-center mt-4">
+                  <button
+                    type="submit"
+                    class="btn btn-primary px-4 py-2 rounded-pill fw-semibold"
+                  >
+                    Register
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end register section -->
+
+    <footer th:replace="/fragments/footer :: footer"></footer>
+  </body>
+</html>

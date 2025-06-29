@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+  <!-- footer section -->
+  <footer class="footer_section bg-light text-dark pt-5">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-md-4">
+          <div class="footer_contact">
+            <h4 class="fw-bold text-dark">Contact Us</h4>
+            <div class="contact_link_box d-flex flex-column gap-2">
+              <a href="#" class="text-dark"><i class="fa fa-map-marker me-2"></i>Location</a>
+              <a href="#" class="text-dark"><i class="fa fa-phone me-2"></i>Call +91 6565656565</a>
+              <a href="#" class="text-dark"><i class="fa fa-envelope me-2"></i>rohan071209@gmail.com</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="footer_detail text-center">
+            <a href="#" class="footer-logo fw-bold fs-4 text-primary">Techroniverse</a>
+            <p class="mt-2 text-muted">Your Gateway to Tomorrow’s Tech.</p>
+            <div class="footer_social d-flex justify-content-center gap-3 mt-3">
+              <a href="#"><i class="fa fa-facebook text-primary"></i></a>
+              <a href="#"><i class="fa fa-twitter text-info"></i></a>
+              <a href="#"><i class="fa fa-linkedin text-primary"></i></a>
+              <a href="#"><i class="fa fa-instagram text-danger"></i></a>
+              <a href="#"><i class="fa fa-pinterest text-danger"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-info text-center mt-4 border-top pt-3">
+        <p class="text-muted small">
+          &copy; <span id="displayYear"></span> All Rights Reserved By
+          <a href="https://html.design/" class="text-decoration-none text-primary">Free Html Templates</a><br />
+          &copy; <span id="displayYear"></span> Distributed By
+          <a href="https://themewagon.com/" target="_blank" class="text-decoration-none text-primary">ThemeWagon</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script th:src="@{/js/bootstrap.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+    <script th:src="@{/js/custom.js}"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+    <script> ClassicEditor.create(document.querySelector('#editor'))</script>
+  </footer>
+</body>
+</html>
