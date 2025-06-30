@@ -3,6 +3,7 @@ package org.studyeasy.SpringBlog.config;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,71 +33,75 @@ public class SeedData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        // Save authorities only if not already present
-        for (Privillages auth : Privillages.values()) {
-            if (authorityService.findById(auth.getId()).isEmpty()) {
-                Authority authority = new Authority();
-                authority.setId(auth.getId());
-                authority.setName(auth.getPrivillage());
-                authorityService.save(authority);
-            }
+        // Seed privileges if not already present
+        for (Privillages privilege : Privillages.values()) {
+            authorityService.findById(privilege.getId())
+                    .orElseGet(() -> {
+                        Authority authority = new Authority();
+                        authority.setId(privilege.getId());
+                        authority.setName(privilege.getPrivillage());
+                        return authorityService.save(authority);
+                    });
         }
 
-        Account account01 = new Account();
-        Account account02 = new Account();
-        Account account03 = new Account();
-        Account account04 = new Account();
+        // Seed accounts only if DB is empty
+        if (accountService.findAll().isEmpty()) {
 
-        account01.setEmail("user@user.com");
-        account01.setPassword("pass567");
-        account01.setFirstname("user");
-        account01.setLastname("lastname");
-        account01.setAge(23);
-        account01.setDate_of_birth(LocalDate.parse("2000-09-04"));
-        account01.setGender("Male");
+            Account account01 = new Account();
+            account01.setEmail("user@user.com");
+            account01.setPassword("pass567");
+            account01.setFirstname("user");
+            account01.setLastname("lastname");
+            account01.setAge(23);
+            account01.setDate_of_birth(LocalDate.parse("2000-09-04"));
+            account01.setGender("Male");
 
-        account02.setEmail("admin@Techroniverseadmin.com");
-        account02.setPassword("pass567");
-        account02.setFirstname("admin");
-        account02.setLastname("lastname");
-        account02.setRole(Roles.ADMIN.getRole());
-        account02.setAge(50);
-        account02.setDate_of_birth(LocalDate.parse("1975-08-05"));
-        account02.setGender("Male");
+            Account account02 = new Account();
+            account02.setEmail("admin@Techroniverseadmin.com");
+            account02.setPassword("pass567");
+            account02.setFirstname("admin");
+            account02.setLastname("lastname");
+            account02.setRole(Roles.ADMIN.getRole());
+            account02.setAge(50);
+            account02.setDate_of_birth(LocalDate.parse("1975-08-05"));
+            account02.setGender("Male");
 
-        account03.setEmail("editor@editor.com");
-        account03.setPassword("pass567");
-        account03.setFirstname("editor");
-        account03.setLastname("lastname");
-        account03.setRole(Roles.EDITOR.getRole());
-        account03.setAge(22);
-        account03.setDate_of_birth(LocalDate.parse("2002-03-12"));
-        account03.setGender("Female");
+            Account account03 = new Account();
+            account03.setEmail("editor@editor.com");
+            account03.setPassword("pass567");
+            account03.setFirstname("editor");
+            account03.setLastname("lastname");
+            account03.setRole(Roles.EDITOR.getRole());
+            account03.setAge(22);
+            account03.setDate_of_birth(LocalDate.parse("2002-03-12"));
+            account03.setGender("Female");
 
-        account04.setEmail("super_editor@editor.com");
-        account04.setPassword("pass567");
-        account04.setFirstname("super_editor");
-        account04.setLastname("lastname");
-        account04.setRole(Roles.EDITOR.getRole());
-        account04.setAge(31);
-        account04.setDate_of_birth(LocalDate.parse("1990-10-02"));
-        account04.setGender("Male");
+            Account account04 = new Account();
+            account04.setEmail("super_editor@editor.com");
+            account04.setPassword("pass567");
+            account04.setFirstname("super_editor");
+            account04.setLastname("lastname");
+            account04.setRole(Roles.EDITOR.getRole());
+            account04.setAge(31);
+            account04.setDate_of_birth(LocalDate.parse("1990-10-02"));
+            account04.setGender("Male");
 
-        Set<Authority> authorities = new HashSet<>();
-        authorityService.findById(Privillages.RESET_ANY_USER_PASSWORD.getId()).ifPresent(authorities::add);
-        authorityService.findById(Privillages.ACCESS_ADMIN_PANEL.getId()).ifPresent(authorities::add);
-        account04.setAuthorities(authorities);
+            // Add specific privileges to account04
+            Set<Authority> authorities = new HashSet<>();
+            authorityService.findById(Privillages.RESET_ANY_USER_PASSWORD.getId()).ifPresent(authorities::add);
+            authorityService.findById(Privillages.ACCESS_ADMIN_PANEL.getId()).ifPresent(authorities::add);
+            account04.setAuthorities(authorities);
 
-        accountService.save(account01);
-        accountService.save(account02);
-        accountService.save(account03);
-        accountService.save(account04);
+            accountService.save(account01);
+            accountService.save(account02);
+            accountService.save(account03);
+            accountService.save(account04);
 
-        List<Post> posts = postService.findAll();
-        if (posts.isEmpty()) {
+            // Seed posts for users
             Post post01 = new Post();
             post01.setTitle("Spring Boot Overview");
-            post01.setBody("Spring Boot makes it easy to create stand-alone, production-grade Spring-based applications...");
+            post01.setBody(
+                    "Spring Boot makes it easy to create stand-alone, production-grade Spring-based applications...");
             post01.setAccount(account01);
             postService.save(post01);
 
