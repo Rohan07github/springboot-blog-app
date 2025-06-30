@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="/fragments/head :: head"></head>
-
+<head th:replace="~{fragments/head :: head}"></head>
 <body class="sub_page">
 
   <div class="hero_area">
@@ -19,7 +18,6 @@
     Admin..
     </div>
   </section>
-  <footer th:replace="/fragments/footer :: footer"></footer>
-</body>
+<footer th:replace="~{fragments/footer :: footer}"></footer></body>
 
 </html>
