@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head th:replace="/fragments/head :: head"></head>
-
+<head th:replace="~{fragments/head :: head}"></head>
   <body class="sub_page bg-light">
     <div class="hero_area">
       <div class="bg-box">
@@ -184,6 +183,6 @@
     </section>
     <!-- end register section -->
 
-    <footer th:replace="/fragments/footer :: footer"></footer>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
   </body>
 </html>
