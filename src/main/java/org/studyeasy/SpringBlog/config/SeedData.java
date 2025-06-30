@@ -35,13 +35,12 @@ public class SeedData implements CommandLineRunner {
 
         // Seed privileges if not already present
         for (Privillages privilege : Privillages.values()) {
-            authorityService.findById(privilege.getId())
-                    .orElseGet(() -> {
-                        Authority authority = new Authority();
-                        authority.setId(privilege.getId());
-                        authority.setName(privilege.getPrivillage());
-                        return authorityService.save(authority);
-                    });
+            authorityService.findByName(privilege.getPrivillage())
+        .orElseGet(() -> {
+            Authority authority = new Authority();
+            authority.setName(privilege.getPrivillage());
+            return authorityService.save(authority);
+        });
         }
 
         // Seed accounts only if DB is empty
