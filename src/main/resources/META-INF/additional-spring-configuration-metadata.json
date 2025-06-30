@@ -43,5 +43,20 @@
     "name": "site.domain",
     "type": "java.lang.String",
     "description": "A description for 'site.domain'"
+  },
+  {
+    "name": "spring.postgres.datasource.url",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.postgres.datasource.url'"
+  },
+  {
+    "name": "spring.postgres.datasource.username",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.postgres.datasource.username'"
+  },
+  {
+    "name": "spring.postgres.datasource.password",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.postgres.datasource.password'"
   }
 ]}
