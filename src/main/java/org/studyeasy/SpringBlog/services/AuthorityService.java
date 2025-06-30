@@ -19,4 +19,8 @@ public class AuthorityService  {
     public Optional<Authority> findById(Long id){
         return authorityRepository.findById(id);
     }
+
+    public Optional<Authority> findByName(String name) {
+        return authorityRepository.findByName(name);
+    }
 }
