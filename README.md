@@ -18,7 +18,7 @@ A secure and user-friendly blog application built using Spring Boot MVC with aut
 - Spring Security
 - Spring Data JPA
 - Thymeleaf + Bootstrap
-- MySQL
+- PostgreSQL
 - Gmail SMTP (for password reset)
 - Maven
 
