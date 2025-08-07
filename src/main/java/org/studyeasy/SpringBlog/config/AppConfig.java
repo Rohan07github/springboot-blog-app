@@ -12,7 +12,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 @Configuration
 public class AppConfig {
 
-    @Value("${mail.transport.protocol}")
+    @Value("${spring.mail.properties.mail.transport.protocol}")
     private String mail_transport_protocol;
 
     @Value("${spring.mail.port}")
