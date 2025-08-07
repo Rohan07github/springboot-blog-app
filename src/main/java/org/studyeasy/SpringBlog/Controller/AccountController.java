@@ -35,7 +35,7 @@ public class AccountController {
     @Autowired
     private EmailService emailService;
 
-    @Value("${spring.mvc.static-path-pattern}")
+    @Value("${string.mvc.static-path-pattern}")
     private String photo_prefix;
 
     @Value("${site.domain}")
