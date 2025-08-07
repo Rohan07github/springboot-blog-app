@@ -1,5 +1,4 @@
 # Ignore secret.properties - important
-/src/main/resources/application.properties
 /src/main/resources/application-prod.properties
 /src/main/resources/secret.properties
 
