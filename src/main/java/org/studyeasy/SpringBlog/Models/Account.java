@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -70,7 +71,7 @@ public class Account {
     @Column(name = "token")
     private String password_reset_token;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "account_authority", joinColumns = {
             @JoinColumn(name = "account_id", referencedColumnName = "id") }, inverseJoinColumns = {
                     @JoinColumn(name = "authority_id", referencedColumnName = "id") })

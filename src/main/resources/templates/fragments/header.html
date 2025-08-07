@@ -6,16 +6,19 @@
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Your Custom CSS -->  
   <link rel="stylesheet" th:href="@{/css/header.css}">
 </head>
 
 <!-- header section starts -->
-<header class="header_section shadow-sm bg-white">
+<header class="header_section">
   <div class="container">
     <nav class="navbar navbar-expand-lg custom_nav-container py-3">
-      <a class="navbar-brand fw-bold text-primary" href="/" style="font-size: 1.7rem;">
+      <a class="navbar-brand fw-bold" href="/">
         <span>Techroniverse</span>
       </a>
 
@@ -25,7 +28,7 @@
       </button>
 
       <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-        <ul class="navbar-nav d-flex gap-3 align-items-center">
+        <ul class="navbar-nav d-flex gap-2 align-items-center">
 
           <li class="nav-item">
             <a class="nav-link [[${#httpServletRequest.requestURI == '/' ? 'active-link' : ''}]]" href="/">Home</a>
@@ -57,7 +60,7 @@
 
           <span sec:authorize="hasRole('ROLE_ADMIN')">
             <li class="nav-item">
-              <a class="nav-link text-danger [[${#httpServletRequest.requestURI == '/admin' ? 'active-link' : ''}]]" href="/admin">Admin</a>
+              <a class="nav-link [[${#httpServletRequest.requestURI == '/admin' ? 'active-link' : ''}]]" href="/admin">Admin</a>
             </li>
           </span>
 
@@ -73,5 +76,8 @@
   </div>
 </header>
 <!-- end header section -->
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </html>

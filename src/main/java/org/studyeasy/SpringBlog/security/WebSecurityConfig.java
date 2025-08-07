@@ -2,7 +2,6 @@ package org.studyeasy.SpringBlog.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,8 +14,8 @@ import org.studyeasy.SpringBlog.util.constants.Privillages;
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class WebSecurityConfig {
-    public static final String[] WHITELIST = {
 
+    public static final String[] WHITELIST = {
             "/",
             "/home",
             "/login",
@@ -28,48 +27,54 @@ public class WebSecurityConfig {
             "/js/**",
             "/fonts/**",
             "/webjars/**"
-
     };
 
     @Bean
-    static PasswordEncoder passwordEncoder() {
+    public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-         // TODO:remove these after upgrading the DB from H2 infile DB
-                .csrf(csrf -> csrf.disable())
-                .headers(headers -> headers.frameOptions(frame -> frame.disable()))
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(WHITELIST).permitAll()
-                        .requestMatchers("/profile/**").authenticated()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/editor/**").hasAnyRole("ADMIN","EDITOR")
-                        .requestMatchers("/test").hasAuthority(Privillages.ACCESS_ADMIN_PANEL.getPrivillage())
-                        .anyRequest().permitAll())
-                        
-
-                        
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .loginProcessingUrl("/login")
-                        .usernameParameter("email")
-                        .passwordParameter("password")
-                        .defaultSuccessUrl("/", true)
-                        .failureUrl("/login?error")
-                        .permitAll())
-
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/"))
-        
-                .rememberMe(rememberMe -> rememberMe.rememberMeParameter("remember-me"))
-                        .httpBasic(Customizer.withDefaults());
-                
+            // Enable CSRF protection for web app unless explicitly disabling for APIs only
+            .csrf(csrf -> csrf
+                .ignoringRequestMatchers("/db-console/**") // example: disable CSRF for H2 console or APIs if you need
+            )
+            .headers(headers -> headers
+                .frameOptions(frame -> frame.sameOrigin()) // Allow H2 console frames if used
+            )
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers(WHITELIST).permitAll()
+                .requestMatchers("/profile/**").authenticated()
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+                .requestMatchers("/editor/**").hasAnyRole("ADMIN", "EDITOR")
+                .requestMatchers("/test").hasAuthority(Privillages.ACCESS_ADMIN_PANEL.getPrivillage())
+                .anyRequest().authenticated() // Secure all other endpoints
+            )
+            .formLogin(form -> form
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .defaultSuccessUrl("/", true)
+                .failureUrl("/login?error")
+                .permitAll()
+            )
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .permitAll()
+            )
+            .rememberMe(rememberMe -> rememberMe
+                .rememberMeParameter("remember-me")
+                // Optionally configure token validity (e.g., valid for 14 days)
+                .tokenValiditySeconds(14 * 24 * 60 * 60)
+            )
+            // Remove or enable HTTP Basic depending on need:
+            //.httpBasic(Customizer.withDefaults())
+            ;
 
         return http.build();
     }
-    }
-
+}
