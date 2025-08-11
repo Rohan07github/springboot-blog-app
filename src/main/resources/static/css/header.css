@@ -27,6 +27,12 @@
   position: relative;
   z-index: 3;
   padding: 0;
+  background: transparent !important; /* ✅ Make navbar transparent */
+}
+
+/* Ensure nav text is visible on dark background */
+.navbar-light .navbar-nav .nav-link {
+  color: #fff !important;
 }
 
 /* Navbar Brand */
@@ -118,7 +124,7 @@
 /* New styles for Profile, Add Post, and Admin */
 .nav-link[href*="profile"] {
   color: #ffffff !important;
-  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); /* Purple gradient */
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
   border-color: rgba(139, 92, 246, 0.3);
 }
 
@@ -131,7 +137,7 @@
 
 .nav-link[href*="posts/add"] {
   color: #ffffff !important;
-  background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%); /* Teal gradient */
+  background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
   border-color: rgba(20, 184, 166, 0.3);
 }
 
@@ -144,7 +150,7 @@
 
 .nav-link[href*="admin"] {
   color: #ffffff !important;
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); /* Red gradient */
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
   border-color: rgba(239, 68, 68, 0.3);
 }
 
@@ -157,7 +163,7 @@
 
 .nav-link[href*="logout"] {
   color: #ffffff !important;
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); /* Red gradient */
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
   border-color: rgba(239, 68, 68, 0.3);
 }
 
